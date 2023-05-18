@@ -25,6 +25,9 @@ const questionSchema = mongoose.Schema(
         max: {
             type:Number,
         },
+        Rating:
+               [{type:mongoose.Schema.Types.Array,ref:'ratingSchema'}],
+        
         // Rating_id: {
         //     Ratings:[{
         //         id: {
@@ -55,29 +58,24 @@ const questionSchema = mongoose.Schema(
 module.exports = mongoose.model('Question',questionSchema);
 
 
-// const mongoose = require('mongoose');
 
-// const ratingSchema = new mongoose.Schema({
-//   Ratings: {
-//     id: {
-//       type: Number,
-//       required: true
-//     },
-//     min: {
-//       type: Number
-//     },
-//     max: {
-//       type: Number
-//     },
-//     Rating_description: {
-//       type: String
-//     },
-//     Rating_value: {
-//       type: Number
-//     }
-//   }
-// });
+const ratingSchema = new mongoose.Schema({
+  
+    Rating_id: {
+      type: Number,
+      required: true
+    },
+    Rating_description: {
+      type: String,
+    },
+    Rating_value: {
+      type: Number,
+    },
+    
+  }
+);
 
+module.exports = mongoose.model;('ratingSchema',ratingSchema);
 // const questionSchema = mongoose.Schema({
 //   question: {
 //     id: {

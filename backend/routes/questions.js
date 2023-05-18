@@ -12,7 +12,7 @@ router.route('/').get((req,res)=>{
     .then(questions => res.json(questions))
     .catch(err=>res.status(400).json('Error:' + err));
 });
-router.get('/survey/:id/questions',(req, res) => {
+router.get('/surveys/:id/questions',(req, res) => {
     const id = generateUUID();
     Question.find({ surveyId: req.params.id })
       .then(questions => res.json(questions))
@@ -56,7 +56,7 @@ router.route('/add').post((req,res)=>{
     .catch(err => res.status(400).json('Error: ' + err));
 });
 router.route('/survey/:id/questions/add').post((req, res) => {
-    const { question, description, weight, optionsType, rating, ratings, min, max, ratingDescription, ratingValue } = req.body;
+    const { question, description, weight, optionsType, Rating,Rating_id,  min, max, Rating_description, Rating_value } = req.body;
   
     const newSurvey = new Survey({
       surveyId: req.params.id,
@@ -64,12 +64,12 @@ router.route('/survey/:id/questions/add').post((req, res) => {
       description,
       weight,
       optionsType,
-      rating,
-      ratings,
+      Rating,
+      Rating_id,
       min,
       max,
-      ratingDescription,
-      ratingValue
+      Rating_description,
+      Rating_value
     });
   
     newSurvey.save()
@@ -114,6 +114,7 @@ router.route('/:id').get((req, res) => {
         question.description = req.body.description;
         question.weight = req.body.weight;
         question.Options_type = req.body.Options_type;
+
   
         question.save()
           .then(() => res.json('Question updated!'))
