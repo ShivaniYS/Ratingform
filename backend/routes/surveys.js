@@ -1,15 +1,19 @@
 const router = require('express').Router();
 let Survey = require('../config/models/surveymodel');
 router.route('/').get((req,res)=>{
-    Survey.find()
+   Survey.find()
     .then(surveys => res.json(surveys))
     .catch(err=>res.status(400).json('Error:' + err));
 });
-router.route('/add').post((req,res)=>{
-    const _id = req.body._id;
 
+
+router.route('/add').post((req,res)=>{
+    // const _id = req.body._id;
+const {name,Questions} = req.body;
+console.log(Questions,' question bug');
     const newSurvey = new Survey({
-        _id,
+        // _id,
+        name,Questions
     });
     newSurvey.save()
     .then(() => res.json('Survey Created!'))
@@ -17,6 +21,7 @@ router.route('/add').post((req,res)=>{
 });
 
 router.route('/:id').get((req, res) => {
+    // console.log(req.params.id);
     Survey.findById(req.params.id)
       .then(surveys => res.json(surveys))
       .catch(err => res.status(400).json('Error: ' + err));
@@ -32,7 +37,9 @@ router.route('/:id').get((req, res) => {
   router.route('/update/:id').post((req, res) => {
     Survey.findById(req.params.id)
       .then(surveys => {
-        surveys._id = req.body._id;
+        const {name,Questions} = req.body;
+
+
         
   
         surveys.save()
@@ -44,8 +51,10 @@ router.route('/:id').get((req, res) => {
  
   router.route('/update/:id').put((req, res) => {
     Survey.findById(req.params.id)
+
       .then(survey => {
         survey._id = req.body._id;
+
         
         survey.save()
           .then(() => res.json('Survey updated!'))

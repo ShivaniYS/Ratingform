@@ -1,11 +1,12 @@
 const { Int32 } = require('mongodb');
 const mongoose = require('mongoose');
+const Survey = require("../models/surveymodel")
 
 const questionSchema = mongoose.Schema(
     {
-    surveyId: {
-        type: mongoose.Schema.ObjectId,
-    },  
+    // surveyId: {
+    //     type: mongoose.Schema.ObjectId,
+    // },  
     question: {
         id: {
           type: String,
@@ -24,22 +25,25 @@ const questionSchema = mongoose.Schema(
         max: {
             type:Number,
         },
-        Rating_id: {
-            Ratings:[{
-                id: {
-                    type: Number,
-                },
-                Rating_value: {
-                    type:Number,
-                },
-                Rating_description: {
-                    type:String,
-                }
-            }],
-        },
+        // Rating_id: {
+        //     Ratings:[{
+        //         id: {
+        //             type: Number,
+        //         },
+        //         Rating_value: {
+        //             type:Number,
+        //         },
+        //         Rating_description: {
+        //             type:String,
+        //         }
+        //     }],
+        // },
         Options_type: {
            type: String,
         },
+        // Survey:{
+        //     type:mongoose.Schema.Types.ObjectId,ref:'Survey'
+        // }
 
 
     }

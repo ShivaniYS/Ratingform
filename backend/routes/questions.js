@@ -8,6 +8,7 @@ const generateUUID = () => {
   };
 router.route('/').get((req,res)=>{
     Question.find()
+//    res.json(question);
     .then(questions => res.json(questions))
     .catch(err=>res.status(400).json('Error:' + err));
 });
@@ -90,13 +91,14 @@ router.route('/:id').get((req, res) => {
   
   router.route('/update/:id').post((req, res) => {
     Question.findById(req.params.id)
+      
       .then(questions => {
         questions.question = req.body.question;
         questions.id = req.body.id;
         questions.description = req.body.description;
         questions.weight= req.body.weight;
         questions.Options_type = req.body.Options_type;
-  
+        
         questions.save()
           .then(() => res.json('Question updated!'))
           .catch(err => res.status(400).json('Error: ' + err));
