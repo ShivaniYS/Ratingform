@@ -2,16 +2,11 @@ const mongoose = require('mongoose');
 const Question = require('../models/questionmodel');
 
 const surveySchema = mongoose.Schema(
-    {
-        // _id:{
-        //     type: Number,
-        //     ref:'Question'
-        // },
-        name:{
+    {name:{
             type: String,
             require:true,
         },
-        Questions:[{type:mongoose.Schema.Types.Array,ref:'Question'}]
+        Questions:[{type:mongoose.Schema.Types.Object,ref:'Question'}]
              
         
     }

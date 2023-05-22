@@ -1,10 +1,23 @@
 const router = require("express").Router();
 let Survey = require("../config/models/surveymodel");
+// const uuid = require('uuid');
+
+
+// let Questions = require('../config/models/questionmodel');
+// const generateUUID = () => {
+//     return uuid.v4();
+//   };
+  
 router.route("/").get((req, res) => {
   Survey.find()
     .then((surveys) => res.json(surveys))
     .catch((err) => res.status(400).json("Error:" + err));
 });
+// router.route("/surveys/generateUUID/questions").get((req, res) => {
+//   Questions.find()
+//     .then((surveys) => res.json(surveys))
+//     .catch((err) => res.status(400).json("Error:" + err));
+// });
 
 router.route("/add").post((req, res) => {
   // const _id = req.body._id;
@@ -22,13 +35,18 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("")
 router.route("/:id").get((req, res) => {
   // console.log(req.params.id);
   Survey.findById(req.params.id)
     .then((surveys) => res.json(surveys))
     .catch((err) => res.status(400).json("Error: " + err));
 });
-
+router.route("/:id/questions").get((req,res)=>{
+ Questions.findById({surveyId:req.params.id})
+    .then((surveys) => res.json(surveys))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
 router.route("/:id").delete((req, res) => {
   Survey.findByIdAndDelete(req.params.id)
     .then(() => res.json("Survey deleted."))

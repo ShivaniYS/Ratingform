@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const survey = require('../routes/surveys');
 const uuid = require('uuid');
 
 
@@ -12,9 +13,9 @@ router.route('/').get((req,res)=>{
     .then(questions => res.json(questions))
     .catch(err=>res.status(400).json('Error:' + err));
 });
-router.get('/surveys/:id/questions',(req, res) => {
+router.get('/survey/:id/questions',(req, res) => {
     const id = generateUUID();
-    Question.find({ surveyId: req.params.id })
+    Question.findById(id)
       .then(questions => res.json(questions))
       .catch(err => res.status(400).json('Error: ' + err));
   });

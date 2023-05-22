@@ -19,12 +19,12 @@ const questionSchema = mongoose.Schema(
         weight:{
                type:Number,
         },
-        min: {
-            type:Number,
-        },
-        max: {
-            type:Number,
-        },
+        // min: {
+        //     type:Number,
+        // },
+        // max: {
+        //     type:Number,
+        // },
         Rating:
                [{type:mongoose.Schema.Types.Array,ref:'ratingSchema'}],
         
@@ -54,10 +54,10 @@ const questionSchema = mongoose.Schema(
 
 });
 
-
 module.exports = mongoose.model('Question',questionSchema);
 
-
+// /survey/:id/q/:qid
+// const {id,qid} = req.params;
 
 const ratingSchema = new mongoose.Schema({
   
